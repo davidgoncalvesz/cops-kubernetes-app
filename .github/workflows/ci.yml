@@ -65,7 +65,7 @@ jobs:
       - name: modify the image
         run: |
           git config user.email davidxgoncalves@gmail.com
-          git config user.name davidgoncalves
+          git config user.name davidgoncalvesz
           pwd
           cat deployment.yaml
           pwd
