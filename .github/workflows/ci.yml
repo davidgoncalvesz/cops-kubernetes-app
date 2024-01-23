@@ -49,7 +49,7 @@ jobs:
           pwd
           cat helm/templates/rollout.yaml
           pwd
-          sed -i "s+davidgoncalvesz/app-gitops:dev.*+davidgoncalvesz/app-gitops:dev-$RUN_NUMBER+g" helm/templates/rollout.yaml
+          sed -i "s+davidgoncalvesz/app-gitops:dev-.*+davidgoncalvesz/app-gitops:dev-$RUN_NUMBER+g" helm/templates/rollout.yaml
           cat helm/templates/rollout.yaml
           git add .
           git commit -m 'Done  by Github Actions   Job changemanifest: ${{ github.run_number }}'
