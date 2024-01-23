@@ -1,4 +1,4 @@
-name: Python applicationn
+name: Build application (Docker)
 
 on:
   push:
@@ -47,7 +47,7 @@ jobs:
           git config user.email davidxgoncalves@gmail.com
           git config user.name davidgoncalvesz
           pwd
-          cat deployment.yaml
+          cat templates/rollout.yaml
           pwd
           sed -i "s+davidgoncalvesz/images2.*+davidgoncalvesz/images2:app-gitops-$RUN_NUMBER+g" deployment.yaml
           cat deployment.yaml
