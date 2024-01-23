@@ -1,6 +1,12 @@
-FROM node:16-alpine
-WORKDIR /src
-COPY app/ .
-RUN npm install --quiet
-EXPOSE 3000
-CMD npm start
+# syntax=docker/dockerfile:1
+
+FROM python:3.8-slim-buster
+
+WORKDIR /app
+
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
+
+COPY . .
+
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
