@@ -32,8 +32,28 @@ jobs:
             with:
               context: .
               push: true
-              tags: davidgoncalvesz/images2:dev-latest
-
+              tags: davidgoncalvesz/app-gitops:dev-${{ github.run_number }}
+  modifygit:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: changing the deployment of git repo
+        with:
+          repository: 'davidgoncalvesz/cops-kubernetes-charts'
+          token: ${{ secrets.GIT_PASSWORD }}
+      - name: modify the image
+        run: |
+          git config user.email davidxgoncalves@gmail.com
+          git config user.name davidgoncalvesz
+          pwd
+          cat helm/templates/rollout.yaml
+          pwd
+          sed -i "s+davidgoncalvesz/app-gitops:dev.*+davidgoncalvesz/app-gitops:dev-$RUN_NUMBER+g" helm/templates/rollout.yaml
+          cat helm/templates/rollout.yaml
+          git add .
+          git commit -m 'Done  by Github Actions   Job changemanifest: ${{ github.run_number }}'
+          git push origin main
         env:
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
           GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
