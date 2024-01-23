@@ -47,7 +47,7 @@ jobs:
           git config user.email davidxgoncalves@gmail.com
           git config user.name davidgoncalvesz
           pwd
-          cat templates/rollout.yaml
+          cat helm/templates/rollout.yaml
           pwd
           sed -i "s+davidgoncalvesz/images2.*+davidgoncalvesz/images2:app-gitops-$RUN_NUMBER+g" deployment.yaml
           cat deployment.yaml
