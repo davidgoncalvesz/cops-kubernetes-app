@@ -1,4 +1,4 @@
-name: Build application (Docker)
+name: Build application (Docker) - DEV
 
 on:
   push:
@@ -42,17 +42,15 @@ jobs:
         with:
           repository: 'davidgoncalvesz/cops-kubernetes-charts'
           token: ${{ secrets.GIT_PASSWORD }}
-      - name: switch to 'dev' branch
-        run: git checkout dev
       - name: modify the image
         run: |
           git config user.email david.viragoncalves@student.ucll.be
           git config user.name davidgoncalvesz
           pwd
-          cat helm/templates/rollout.yaml
+          cat helm/values.dev.yaml
           pwd
-          sed -i "s+davidgoncalvesz/app-gitops:dev-.*+davidgoncalvesz/app-gitops:dev-$RUN_NUMBER+g" helm/templates/rollout.yaml
-          cat helm/templates/rollout.yaml
+          sed -i "s+davidgoncalvesz/app-gitops:dev-.*+davidgoncalvesz/app-gitops:dev-$RUN_NUMBER+g" helm/values.dev.yaml
+          cat helm/values.dev.yaml
           git add .
           git commit -m 'Done  by Github Actions   Job changemanifest: ${{ github.run_number }}'
           git push origin main
