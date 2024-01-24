@@ -42,8 +42,6 @@ jobs:
         with:
           repository: 'davidgoncalvesz/cops-kubernetes-charts'
           token: ${{ secrets.GIT_PASSWORD }}
-      - name: switch to 'qa' branch
-        run: git checkout qa
       - name: modify the image
         run: |
           git config user.email david.viragoncalves@student.ucll.be
