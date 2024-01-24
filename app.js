@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
-const path = require('path'); // Add the 'path' module
+const path = require('path'); 
 
 
 app.listen(port);
@@ -15,7 +15,6 @@ app.get('/health', (req, res) => {
 
 app.use(bodyParser.json());
 
-// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
