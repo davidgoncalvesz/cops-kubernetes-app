@@ -33,6 +33,20 @@ jobs:
               context: .
               push: true
               tags: davidgoncalvesz/app-gitops:main-${{ github.run_number }}
+
+          -
+            name: Run Docker container for testing
+            run: docker run -p 3000:3000 app-gitops:main-${{ github.run_number }}
+
+          -
+            name: run docker for testing
+            run: docker run -p 3000:3000 app-gitops:main-${{ github.run_number }}
+
+          - name: Test
+            run: |
+              sleep 5  # Give the container some time to start
+              curl http://localhost:3000/health
+              curl http://localhost:3000/
   modifygit:
     needs: docker
     runs-on: ubuntu-latest
